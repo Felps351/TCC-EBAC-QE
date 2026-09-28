@@ -1,12 +1,12 @@
 const path = require('path');
 const fs = require('fs');
+const Screen = require('./test/utils/screen');
 
 exports.config = {
     runner: 'local',
     port: 4723,
     path: '/',
     specs: [
-        // Por enquanto só o login. Depois que passar, adicione o checkout/catálogo.
         './test/specs/login.spec.js'
     ],
     maxInstances: 1,
@@ -24,7 +24,7 @@ exports.config = {
         'appium:uiautomator2ServerInstallTimeout': 120000,
         'appium:uiautomator2ServerLaunchTimeout': 120000
     }],
-    logLevel: 'info',
+    logLevel: 'warn',
     framework: 'mocha',
     reporters: ['spec'],
     waitforTimeout: 30000,
@@ -39,14 +39,10 @@ exports.config = {
         try {
             const stamp = Date.now();
             await browser.saveScreenshot(`./error-${stamp}.png`);
-            const source = await browser.getPageSource();
-            fs.writeFileSync(`./error-${stamp}.xml`, source);
-            const pkg = await driver.getCurrentPackage();
-            const activity = await driver.getCurrentActivity();
-            console.log(`=== TELA ATUAL: ${pkg} / ${activity} ===`);
-            console.log('=== PAGE SOURCE (início) ===\n' + source.slice(0, 8000));
+            fs.writeFileSync(`./error-${stamp}.xml`, await browser.getPageSource());
         } catch (e) {
-            console.log('Não foi possível coletar evidências:', e.message);
+            console.log('### Não foi possível salvar as evidências:', e.message);
         }
+        await Screen.dump('FALHA');
     }
 };

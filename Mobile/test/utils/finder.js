@@ -1,8 +1,3 @@
-/**
- * Tenta cada seletor, na ordem, até achar um elemento visível.
- * Cada seletor é usado sozinho, então dá para misturar '~id' (Accessibility ID)
- * e XPath na mesma lista, sem juntar tudo numa única string.
- */
 async function findFirst(selectors, timeout = 30000, name = 'elemento') {
     let found;
     try {
