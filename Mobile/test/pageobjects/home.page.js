@@ -1,10 +1,10 @@
 class HomePage {
     get btnProfile() { 
-        return $('~profile, ~perfil, //android.widget.TextView[@text="Perfil"], //android.widget.TextView[@text="Account"]'); 
+        return $('//*[@content-desc="profile" or @content-desc="tab-profile" or @text="Perfil" or @text="Profile" or @text="Account"]'); 
     }
 
     get btnBrowse() { 
-        return $('~browse, ~explorar, //android.widget.TextView[@text="Browse"]'); 
+        return $('//*[@content-desc="browse" or @content-desc="tab-browse" or @text="Browse" or @text="Explorar"]'); 
     }
 
     async goToLogin() {
