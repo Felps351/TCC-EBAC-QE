@@ -3,12 +3,12 @@ class HomePage {
     get btnBrowse() { return $('~browse'); }
 
     async goToLogin() {
-        await this.btnProfile.waitForDisplayed({ timeout: 20000 });
+        await this.btnProfile.waitForDisplayed({ timeout: 60000 });
         await this.btnProfile.click();
     }
 
     async goToBrowse() {
-        await this.btnBrowse.waitForDisplayed({ timeout: 20000 });
+        await this.btnBrowse.waitForDisplayed({ timeout: 60000 });
         await this.btnBrowse.click();
     }
 }

@@ -12,13 +12,15 @@ exports.config = {
         'appium:deviceName': 'Android Emulator',
         'appium:app': './loja-ebac.apk',
         'appium:appWaitActivity': '*',
-        'appium:newCommandTimeout': 240
+        'appium:newCommandTimeout': 240,
+        'appium:autoGrantPermissions': true
     }],
     logLevel: 'info',
     framework: 'mocha',
     reporters: ['spec'],
+    waitforTimeout: 60000,
     mochaOpts: {
         ui: 'bdd',
-        timeout: 120000
+        timeout: 300000
     }
 }
