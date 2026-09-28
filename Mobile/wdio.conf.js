@@ -22,5 +22,10 @@ exports.config = {
     mochaOpts: {
         ui: 'bdd',
         timeout: 300000
+    },
+    afterTest: async function(test, context, { error, result, duration, passed, retry }) {
+        if (!passed) {
+            await browser.saveScreenshot(`./error-${Date.now()}.png`);
+        }
     }
 }

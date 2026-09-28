@@ -37,3 +37,10 @@ jobs:
             npx appium --port 4723 &
             sleep 10
             npm test
+
+      - name: Salvar Screenshots em caso de erro
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: error-screenshots
+          path: Mobile/*.png

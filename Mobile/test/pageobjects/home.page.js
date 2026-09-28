@@ -1,6 +1,11 @@
 class HomePage {
-    get btnProfile() { return $('~profile'); }
-    get btnBrowse() { return $('~browse'); }
+    get btnProfile() { 
+        return $('~profile, ~perfil, //android.widget.TextView[@text="Perfil"], //android.widget.TextView[@text="Account"]'); 
+    }
+
+    get btnBrowse() { 
+        return $('~browse, ~explorar, //android.widget.TextView[@text="Browse"]'); 
+    }
 
     async goToLogin() {
         await this.btnProfile.waitForDisplayed({ timeout: 60000 });
