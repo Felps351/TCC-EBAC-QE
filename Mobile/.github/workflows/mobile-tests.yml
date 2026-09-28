@@ -1,0 +1,38 @@
+name: Executar Testes Mobile Android
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  mobile-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar código do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Instalar dependências da pasta Mobile
+        run: |
+          cd Mobile
+          npm ci
+
+      - name: Executar Emulador Android e Rodar Testes
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          target: default
+          arch: x86_64
+          profile: Nexus 6
+          script: |
+            cd Mobile
+            npx appium --port 4723 &
+            sleep 10
+            npm test

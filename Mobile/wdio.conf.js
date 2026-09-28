@@ -7,17 +7,18 @@ exports.config = {
     ],
     maxInstances: 1,
     capabilities: [{
-    platformName: 'Android',
-    'appium:automationName': 'UiAutomator2',
-    'appium:deviceName': 'Android Emulator',
-    'appium:app': './loja-ebac.apk',
-    'appium:appWaitActivity': '*'
-}],
+        platformName: 'Android',
+        'appium:automationName': 'UiAutomator2',
+        'appium:deviceName': 'Android Emulator',
+        'appium:app': './loja-ebac.apk',
+        'appium:appWaitActivity': '*',
+        'appium:newCommandTimeout': 240
+    }],
     logLevel: 'info',
     framework: 'mocha',
     reporters: ['spec'],
     mochaOpts: {
         ui: 'bdd',
-        timeout: 60000
+        timeout: 120000
     }
 }
