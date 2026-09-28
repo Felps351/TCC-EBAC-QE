@@ -1,20 +1,10 @@
-class LoginPage {
-    get inputEmail() { 
-        return $('//*[@content-desc="email" or @text="E-mail" or @resource-id="email"]'); 
-    }
-    get inputPassword() { 
-        return $('//*[@content-desc="password" or @text="Senha" or @resource-id="password"]'); 
-    }
-    get btnLogin() { 
-        return $('//*[@content-desc="btnLogin" or @text="Login" or @text="Entrar"]'); 
-    }
+const HomePage = require('../pageobjects/home.page');
+const LoginPage = require('../pageobjects/login.page');
 
-    async login(email, password) {
-        await this.inputEmail.waitForDisplayed({ timeout: 30000 });
-        await this.inputEmail.setValue(email);
-        await this.inputPassword.setValue(password);
-        await this.btnLogin.click();
-    }
-}
-
-module.exports = new LoginPage();
+describe('Fluxo de Login', () => {
+    it('deve logar com sucesso usando credenciais válidas', async () => {
+        await HomePage.goToLogin();
+        await LoginPage.login('cliente@ebac.art.br', '123456');
+        await LoginPage.waitFormClosed();
+    });
+});

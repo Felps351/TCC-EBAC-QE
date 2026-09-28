@@ -5,10 +5,12 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   mobile-tests:
     runs-on: ubuntu-latest
+    timeout-minutes: 40
 
     steps:
       - name: Baixar código do repositório
@@ -18,6 +20,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
+
+      - name: Habilitar KVM (emulador mais rápido)
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
 
       - name: Instalar dependências e driver do Appium
         run: |
@@ -32,15 +40,21 @@ jobs:
           target: default
           arch: x86_64
           profile: Nexus 6
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           working-directory: Mobile
           script: |
-            npx appium --port 4723 &
-            sleep 10
+            npx appium --port 4723 > appium.log 2>&1 &
+            timeout 90 bash -c 'until curl -s http://127.0.0.1:4723/status | grep -q "ready"; do sleep 2; done'
             npm test
 
-      - name: Salvar Screenshots em caso de erro
-        if: failure()
+      - name: Salvar evidências (screenshots, page source e log do Appium)
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: error-screenshots
-          path: Mobile/*.png
+          name: evidencias-mobile
+          path: |
+            Mobile/*.png
+            Mobile/*.xml
+            Mobile/appium.log
+          if-no-files-found: ignore

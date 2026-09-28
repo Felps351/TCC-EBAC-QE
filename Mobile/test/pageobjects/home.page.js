@@ -1,20 +1,24 @@
+const { findFirst } = require('../utils/finder');
+
 class HomePage {
-    get btnProfile() { 
-        return $('//*[@content-desc="profile" or @content-desc="tab-profile" or @text="Perfil" or @text="Profile" or @text="Account"]'); 
-    }
-
-    get btnBrowse() { 
-        return $('//*[@content-desc="browse" or @content-desc="tab-browse" or @text="Browse" or @text="Explorar"]'); 
-    }
-
     async goToLogin() {
-        await this.btnProfile.waitForDisplayed({ timeout: 60000 });
-        await this.btnProfile.click();
+        const btnProfile = await findFirst([
+            '~profile', '~Profile', '~tab-profile', '~perfil', '~Perfil',
+            '//*[contains(@content-desc,"rofile")]',
+            '//*[contains(@content-desc,"erfil")]',
+            '//*[@text="Profile" or @text="Perfil" or @text="Account" or @text="Conta"]'
+        ], 45000, 'Aba Perfil');
+        await btnProfile.click();
     }
 
     async goToBrowse() {
-        await this.btnBrowse.waitForDisplayed({ timeout: 60000 });
-        await this.btnBrowse.click();
+        const btnBrowse = await findFirst([
+            '~browse', '~Browse', '~tab-browse', '~explorar', '~Explorar',
+            '//*[contains(@content-desc,"rowse")]',
+            '//*[contains(@content-desc,"xplorar")]',
+            '//*[@text="Browse" or @text="Explorar"]'
+        ], 45000, 'Aba Browse');
+        await btnBrowse.click();
     }
 }
 
