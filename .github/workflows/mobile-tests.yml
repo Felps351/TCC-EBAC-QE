@@ -19,10 +19,11 @@ jobs:
         with:
           node-version: 18
 
-      - name: Instalar dependências da pasta Mobile
+      - name: Instalar dependências e driver do Appium
         run: |
           cd Mobile
           npm install
+          npx appium driver install uiautomator2
 
       - name: Executar Emulador Android e Rodar Testes
         uses: reactivecircus/android-emulator-runner@v2
@@ -31,8 +32,8 @@ jobs:
           target: default
           arch: x86_64
           profile: Nexus 6
+          working-directory: Mobile
           script: |
-            cd Mobile
             npx appium --port 4723 &
             sleep 10
             npm test
