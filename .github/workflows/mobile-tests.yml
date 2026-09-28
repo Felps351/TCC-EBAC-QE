@@ -22,7 +22,7 @@ jobs:
       - name: Instalar dependências da pasta Mobile
         run: |
           cd Mobile
-          npm ci
+          npm install
 
       - name: Executar Emulador Android e Rodar Testes
         uses: reactivecircus/android-emulator-runner@v2
