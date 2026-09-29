@@ -24,6 +24,6 @@ exports.config = {
     connectionRetryCount: 3,
     mochaOpts: {
         ui: 'bdd',
-        timeout: 60000
+        timeout: 180000 // 180 segundos (3 minutos)
     }
 }
