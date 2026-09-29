@@ -1,4 +1,3 @@
-const path = require('path');
 const fs = require('fs');
 const Screen = require('./test/utils/screen');
 
@@ -15,11 +14,9 @@ exports.config = {
         platformName: 'Android',
         'appium:automationName': 'UiAutomator2',
         'appium:deviceName': 'Android Emulator',
-            'appium:appPackage': 'br.com.lojaebac',
-            'appium:appActivity': '.MainActivity',
-            'appium:noReset': true,
-        'appium:appWaitActivity': '*',
-        'appium:appWaitDuration': 60000,
+        'appium:appPackage': 'br.com.lojaebac',
+        'appium:autoLaunch': false,
+        'appium:noReset': true,
         'appium:newCommandTimeout': 240,
         'appium:autoGrantPermissions': true,
         'appium:adbExecTimeout': 120000,
