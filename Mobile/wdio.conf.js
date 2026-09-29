@@ -16,7 +16,7 @@ exports.config = {
         'appium:automationName': 'UiAutomator2',
         'appium:deviceName': 'Android Emulator',
             'appium:appPackage': 'br.com.lojaebac',
-            'appium:appActivity': 'br.com.lojaebac.MainActivity',
+            'appium:appActivity': '.MainActivity',
             'appium:noReset': true,
         'appium:appWaitActivity': '*',
         'appium:appWaitDuration': 60000,
