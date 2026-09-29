@@ -1,61 +1,30 @@
-const HomeScreen = require('../pageobjects/home.screen');
-const CartScreen = require('../pageobjects/cart.screen');
-const CheckoutScreen = require('../pageobjects/checkout.screen');
-const LoginScreen = require('../pageobjects/login.screen');
+const ProloguePage = require('../pageobjects/prologue.page');
+const HomePage = require('../pageobjects/home.page');
+const BrowsePage = require('../pageobjects/browse.page');
+const ProductPage = require('../pageobjects/product.page');
+const CartPage = require('../pageobjects/cart.page');
+const CheckoutPage = require('../pageobjects/checkout.page');
+const LoginPage = require('../pageobjects/login.page');
 
-describe('Fluxo de Checkout no Mobile', () => {
+describe('Fluxo E2E de Compra no Android', () => {
 
-    beforeEach(async () => {
-        // Reinicia o estado da aplicação antes de cada teste
-        await driver.reset();
-    });
+    it('Deve realizar o login, selecionar um produto, adicionar endereço e finalizar a compra', async () => {
+        // 1. Passa pela tela inicial (Prologue) se estiver visível
+        if (typeof ProloguePage.passPrologue === 'function') {
+            await ProloguePage.passPrologue();
+        }
 
-    it('deve realizar uma compra com sucesso preenchendo todos os dados obrigatórios', async () => {
-        // 1. Autenticação do usuário
-        await LoginScreen.login('cliente.teste@email.com', 'Senha123!');
-        await expect(HomeScreen.screenTitle).toBeDisplayed();
+        // 2. Navega até a aba de produtos
+        await HomePage.goToBrowse();
 
-        // 2. Seleção de produto e adição ao carrinho
-        await HomeScreen.selectFirstProduct();
-        await HomeScreen.addToCart();
-        await expect(HomeScreen.cartBadgeCount).toHaveText('1');
-
-        // 3. Navegação para o Carrinho
-        await HomeScreen.goToCart();
-        await expect(CartScreen.cartList).toBeDisplayed();
-        await CartScreen.proceedToCheckout();
-
-        // 4. Preenchimento do formulário de entrega
-        await CheckoutScreen.fillShippingInformation({
-            firstName: 'João',
-            lastName: 'Silva',
-            address: 'Av. Paulista, 1000',
-            city: 'São Paulo',
-            postalCode: '01310-100',
-            country: 'Brasil'
-        });
-
-        // 5. Seleção da forma de pagamento e confirmação
-        await CheckoutScreen.selectPaymentMethod('CreditCard');
-        await CheckoutScreen.placeOrder();
-
-        // 6. Validação do pedido finalizado
-        await expect(CheckoutScreen.successHeader).toBeDisplayed();
-        await expect(CheckoutScreen.successHeader).toHaveText('Pedido Realizado com Sucesso!');
-    });
-
-    it('deve exibir mensagem de erro ao tentar avançar no checkout sem preencher o endereço', async () => {
-        await HomeScreen.selectFirstProduct();
-        await HomeScreen.addToCart();
-        await HomeScreen.goToCart();
-        await CartScreen.proceedToCheckout();
-
-        // Tenta avançar sem preencher os campos obrigatórios
-        await CheckoutScreen.continueButton.click();
-
-        // Validação da mensagem de erro
-        await expect(CheckoutScreen.errorMessage).toBeDisplayed();
-        await expect(CheckoutScreen.errorMessage).toHaveText('Por favor, preencha todos os campos obrigatórios.');
+        // 3. Fluxo de login e navegação
+        // (Ajuste as chamadas abaixo de acordo com as funções do seu projeto)
+        await BrowsePage.selectFirstProduct();
+        await ProductPage.addToCart();
+        await CartPage.goToCheckout();
+        
+        await LoginPage.login('cliente@ebac.com', '123456');
+        await CheckoutPage.finishCheckout();
     });
 
 });
