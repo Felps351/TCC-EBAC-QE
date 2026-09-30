@@ -45,7 +45,7 @@ jobs:
           working-directory: Mobile
           script: |
             adb wait-for-device
-            adb install-multiple -r splits/*.apk
+            adb install-multiple -r $(find splits -name '*.apk' ! -name 'base-master.apk' ! -name 'base-master_2.apk')
             echo "### DUMP DO PACOTE br.com.lojaebac ###"
             adb shell dumpsys package br.com.lojaebac | grep -A 30 "android.intent.action.MAIN"
             echo "### FIM DO DUMP ###"
