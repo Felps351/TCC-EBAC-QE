@@ -6,8 +6,7 @@ exports.config = {
     port: 4723,
     path: '/',
     specs: [
-        './test/specs/login.spec.js',
-        './test/specs/catalog.spec.js'
+        './test/specs/**/*.js'
     ],
     maxInstances: 1,
     bail: 1,
