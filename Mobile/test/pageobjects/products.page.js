@@ -1,10 +1,10 @@
 class ProductsPage {
     get productCards() {
-        return $$('//*[@resource-id="br.com.lojaebac:id/productDetails"]');
+        return $$('//*[contains(@resource-id,"productDetails")]');
     }
 
     get searchInput() {
-        return $('//*[@resource-id="br.com.lojaebac:id/searchInput"]');
+        return $('//*[contains(@resource-id,"searchInput")]');
     }
 
     async getProductCount() {
