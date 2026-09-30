@@ -3,10 +3,18 @@ const ProductsPage = require('../pageobjects/products.page');
 const Screen = require('../utils/screen');
 
 describe('Catálogo de Produtos', () => {
-    it('exibe a lista de produtos ao abrir a aba Browse', async () => {
+    before(async () => {
         await HomePage.goToBrowse();
-        await driver.pause(3000);
+        await browser.waitUntil(
+            async () => (await ProductsPage.productCards).length > 0,
+            {
+                timeout: 20000,
+                timeoutMsg: 'Nenhum produto apareceu na aba Browse depois de 20s'
+            }
+        );
+    });
 
+    it('exibe a lista de produtos ao abrir a aba Browse', async () => {
         const cards = await ProductsPage.productCards;
         expect(cards.length).toBeGreaterThan(0);
     });
