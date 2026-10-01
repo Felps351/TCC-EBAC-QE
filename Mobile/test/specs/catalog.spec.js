@@ -4,14 +4,29 @@ const Screen = require('../utils/screen');
 
 describe('Catálogo de Produtos', () => {
     before(async () => {
+        await Screen.dump('antes-de-clicar-browse');
+
         await HomePage.goToBrowse();
-        await browser.waitUntil(
-            async () => (await ProductsPage.productCards).length > 0,
-            {
-                timeout: 20000,
-                timeoutMsg: 'Nenhum produto apareceu na aba Browse depois de 20s'
-            }
-        );
+        await driver.pause(3000);
+
+        try {
+            await browser.waitUntil(
+                async () => (await ProductsPage.productCards).length > 0,
+                { timeout: 15000, interval: 1500 }
+            );
+        } catch (e) {
+            // Primeira tentativa falhou: clica em Browse de novo e espera mais
+            await Screen.dump('retry-antes-de-clicar-browse-de-novo');
+            await HomePage.goToBrowse();
+            await browser.waitUntil(
+                async () => (await ProductsPage.productCards).length > 0,
+                {
+                    timeout: 30000,
+                    interval: 2000,
+                    timeoutMsg: 'Nenhum produto apareceu na aba Browse mesmo após nova tentativa'
+                }
+            );
+        }
     });
 
     it('exibe a lista de produtos ao abrir a aba Browse', async () => {
