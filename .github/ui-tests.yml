@@ -1,0 +1,31 @@
+name: Executar Testes UI (Cypress)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  ui-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Baixar código do repositório
+        uses: actions/checkout@v4
+
+      - name: Executar testes Cypress
+        uses: cypress-io/github-action@v6
+        with:
+          working-directory: UI
+          browser: electron
+
+      - name: Salvar screenshots em caso de falha
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-ui
+          path: UI/cypress/screenshots
+          if-no-files-found: ignore
