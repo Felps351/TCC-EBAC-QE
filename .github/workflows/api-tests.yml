@@ -28,3 +28,11 @@ jobs:
       - name: Executar testes da API
         working-directory: API
         run: npm test
+
+      - name: Salvar relatório HTML dos testes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-api
+          path: API/reports
+          if-no-files-found: ignore
