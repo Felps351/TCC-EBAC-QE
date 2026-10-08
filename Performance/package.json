@@ -1,0 +1,10 @@
+{
+  "name": "performance",
+  "version": "1.0.0",
+  "description": "Testes de performance com K6 - TCC EBAC Shop",
+  "scripts": {
+    "test:login": "k6 run login.test.js",
+    "test:catalogo": "k6 run catalogo.test.js",
+    "test:all": "k6 run login.test.js && k6 run catalogo.test.js"
+  }
+}

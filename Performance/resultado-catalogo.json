@@ -1,0 +1,140 @@
+{
+    "root_group": {
+        "checks": {
+            "catálogo carregou com sucesso (200)": {
+                "name": "catálogo carregou com sucesso (200)",
+                "path": "::catálogo carregou com sucesso (200)",
+                "id": "05cbfeb18c39145a0722c67b39d12972",
+                "passes": 502,
+                "fails": 5
+            },
+            "página contém a listagem de produtos": {
+                "name": "página contém a listagem de produtos",
+                "path": "::página contém a listagem de produtos",
+                "id": "433fc99f459780e9c8d2536c023fea56",
+                "passes": 399,
+                "fails": 108
+            }
+        },
+        "name": "",
+        "path": "",
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {}
+    },
+    "metrics": {
+        "http_reqs": {
+            "count": 507,
+            "rate": 4.121376560900102
+        },
+        "http_req_waiting": {
+            "avg": 2517.236916270217,
+            "min": 271.986108,
+            "med": 2667.406999,
+            "max": 4040.139998,
+            "p(90)": 3233.4762796000005,
+            "p(95)": 3395.9742807000002
+        },
+        "http_req_receiving": {
+            "p(95)": 1465.9389194,
+            "avg": 886.3651414832344,
+            "min": 0.06932,
+            "med": 931.843924,
+            "max": 1815.531092,
+            "p(90)": 1353.975699
+        },
+        "iterations": {
+            "count": 507,
+            "rate": 4.121376560900102
+        },
+        "http_req_duration": {
+            "med": 3588.370387,
+            "max": 5258.425087,
+            "p(90)": 4403.1012632,
+            "p(95)": 4575.8731624,
+            "avg": 3403.627779721894,
+            "min": 625.873982,
+            "thresholds": {
+                "p(95)<3000": true
+            }
+        },
+        "http_req_failed": {
+            "passes": 5,
+            "fails": 502,
+            "thresholds": {
+                "rate<0.05": false
+            },
+            "value": 0.009861932938856016
+        },
+        "checks": {
+            "passes": 901,
+            "fails": 113,
+            "value": 0.888560157790927
+        },
+        "iteration_duration": {
+            "avg": 4410.281999692304,
+            "min": 1627.891024,
+            "med": 4594.059873,
+            "max": 6259.597958,
+            "p(90)": 5404.788335,
+            "p(95)": 5577.4271077
+        },
+        "http_req_sending": {
+            "min": 0.007514,
+            "med": 0.024485,
+            "max": 0.206392,
+            "p(90)": 0.035376,
+            "p(95)": 0.0415817,
+            "avg": 0.025721968441814583
+        },
+        "vus_max": {
+            "value": 20,
+            "min": 20,
+            "max": 20
+        },
+        "http_req_tls_handshaking": {
+            "max": 0,
+            "p(90)": 0,
+            "p(95)": 0,
+            "avg": 0,
+            "min": 0,
+            "med": 0
+        },
+        "vus": {
+            "value": 1,
+            "min": 1,
+            "max": 20
+        },
+        "http_req_blocked": {
+            "avg": 5.173332706114398,
+            "min": 0.003025,
+            "med": 0.006392,
+            "max": 363.212421,
+            "p(90)": 0.010517400000000005,
+            "p(95)": 0.024609799999999973
+        },
+        "http_req_duration{expected_response:true}": {
+            "avg": 3418.8477551454193,
+            "min": 625.873982,
+            "med": 3592.8504725000003,
+            "max": 5258.425087,
+            "p(90)": 4406.8672347,
+            "p(95)": 4578.2027079
+        },
+        "http_req_connecting": {
+            "min": 0,
+            "med": 0,
+            "max": 124.740901,
+            "p(90)": 0,
+            "p(95)": 0,
+            "avg": 4.679390566074951
+        },
+        "data_sent": {
+            "count": 46137,
+            "rate": 375.04526704190926
+        },
+        "data_received": {
+            "count": 91616465,
+            "rate": 744745.4663580366
+        }
+    }
+}
