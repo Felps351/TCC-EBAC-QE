@@ -22,6 +22,14 @@ jobs:
           working-directory: UI
           browser: electron
 
+      - name: Salvar relatório HTML dos testes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-ui
+          path: UI/cypress/reports
+          if-no-files-found: ignore
+
       - name: Salvar screenshots em caso de falha
         if: failure()
         uses: actions/upload-artifact@v4
