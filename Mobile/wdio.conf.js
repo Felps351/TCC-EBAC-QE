@@ -26,7 +26,14 @@ exports.config = {
     }],
     logLevel: 'warn',
     framework: 'mocha',
-    reporters: ['spec'],
+    reporters: [
+        'spec',
+        ['allure', {
+            outputDir: 'allure-results',
+            disableWebdriverStepsReporting: true,
+            disableWebdriverScreenshotsReporting: false
+        }]
+    ],
     waitforTimeout: 30000,
     connectionRetryTimeout: 180000,
     connectionRetryCount: 3,

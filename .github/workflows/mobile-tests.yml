@@ -65,3 +65,23 @@ jobs:
             Mobile/*.xml
             Mobile/appium.log
           if-no-files-found: ignore
+
+      - name: Configurar Java (necessário para gerar o relatório Allure)
+        if: always()
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Gerar relatório Allure
+        if: always()
+        working-directory: Mobile
+        run: npx allure generate allure-results --clean --single-file -o allure-report
+
+      - name: Salvar relatório Allure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-mobile-allure
+          path: Mobile/allure-report
+          if-no-files-found: ignore
